@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meghna's Art Classes</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1412;--cream:#fef8f0;--warm:#fdf3e0;
+  --coral:#f45b3b;--gold:#f5a623;--sage:#5aa67a;
+  --sky:#3b82f6;--violet:#7c3aed;--blush:#f9a8d4;
+  --card:#ffffff;--border:rgba(28,20,18,0.1);
+  --shadow:0 4px 24px rgba(28,20,18,0.1);--shadow-lg:0 12px 48px rgba(28,20,18,0.16);
+  --r:16px;--r-lg:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 10% 20%,rgba(244,91,59,.06) 0%,transparent 50%),radial-gradient(circle at 85% 10%,rgba(245,166,35,.08) 0%,transparent 45%),radial-gradient(circle at 60% 85%,rgba(90,166,122,.06) 0%,transparent 50%),radial-gradient(circle at 20% 80%,rgba(124,58,237,.05) 0%,transparent 40%);pointer-events:none;z-index:0;}
+
+/* PAGES */
+.page{display:none;min-height:100vh;position:relative;z-index:1;animation:fadeSlide .35s ease both;}
+.page.active{display:block;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(254,248,240,.94);backdrop-filter:blur(16px);border-bottom:2px solid rgba(244,91,59,.15);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:900;color:var(--coral);cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.nav-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.np{background:none;border:1.5px solid transparent;padding:5px 12px;border-radius:30px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;transition:all .2s;color:var(--ink);}
+.np:hover{background:var(--warm);border-color:var(--gold);}
+.np.act{background:var(--coral);color:#fff;border-color:var(--coral);}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#fff9ef 0%,#ffeedd 50%,#fff5f0 100%);padding:60px 20px 50px;text-align:center;}
+.hero-deco{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hero-deco span{position:absolute;font-size:2.5rem;opacity:.1;animation:drift linear infinite;}
+@keyframes drift{0%{transform:translateY(0) rotate(0deg)}100%{transform:translateY(-120vh) rotate(360deg)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(244,91,59,.1);border:1.5px solid rgba(244,91,59,.3);padding:5px 14px;border-radius:30px;font-size:.8rem;font-weight:700;color:var(--coral);margin-bottom:18px;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(2.2rem,7vw,4rem);font-weight:900;line-height:1.05;color:var(--ink);margin-bottom:14px;}
+.hero h1 em{font-style:italic;background:linear-gradient(135deg,var(--coral),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:1.05rem;color:#6b5a50;font-style:italic;font-weight:500;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:30px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.9rem;border:none;cursor:pointer;transition:all .22s;box-shadow:0 3px 12px rgba(0,0,0,.12);}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.18);}
+.btn-coral{background:var(--coral);color:#fff;}
+.btn-gold{background:var(--gold);color:#fff;}
+.btn-sage{background:var(--sage);color:#fff;}
+.btn-sky{background:var(--sky);color:#fff;}
+.btn-violet{background:var(--violet);color:#fff;}
+.btn-dark{background:var(--ink);color:#fff;}
+.btn-outline{background:#fff;color:var(--coral);border:2px solid var(--coral);box-shadow:none;}
+.btn-ghost{background:rgba(255,255,255,.7);color:var(--ink);border:1.5px solid var(--border);box-shadow:none;}
+.btn-sm{padding:7px 15px;font-size:.8rem;}
+.btn-full{width:100%;justify-content:center;}
+
+/* LAYOUT */
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px;}
+.sec-title{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;color:var(--ink);margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+.sec-sub{color:#7a6560;font-size:.92rem;margin-bottom:22px;}
+.card{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:24px;margin-bottom:18px;border:1.5px solid var(--border);}
+.divider{border:none;border-top:1.5px dashed #e8ddd8;margin:18px 0;}
+
+/* GALLERY */
+.gal-sec{padding:48px 16px 32px;background:linear-gradient(180deg,var(--warm) 0%,var(--cream) 100%);}
+.gal-header{max-width:820px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px;}
+.gal-grid{max-width:820px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px;}
+.gal-item{position:relative;border-radius:var(--r);overflow:hidden;background:#f5ece0;aspect-ratio:4/3;cursor:pointer;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;border:2px solid rgba(255,255,255,.8);}
+.gal-item:hover{transform:scale(1.03);box-shadow:var(--shadow-lg);}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
+.gal-item:hover img{transform:scale(1.08);}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(28,20,18,.65) 0%,transparent 60%);opacity:0;transition:opacity .25s;display:flex;align-items:flex-end;padding:12px;}
+.gal-item:hover .gal-overlay{opacity:1;}
+.gal-overlay span{color:#fff;font-size:.78rem;font-weight:600;}
+.gal-del{position:absolute;top:8px;right:8px;background:rgba(244,91,59,.9);color:#fff;border:none;border-radius:50%;width:28px;height:28px;font-size:.8rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2;}
+.admin-mode .gal-del{display:flex;}
+.gal-ph{grid-column:1/-1;text-align:center;padding:40px;color:#baa89a;}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:500;background:rgba(15,10,8,.92);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:85vh;border-radius:var(--r);object-fit:contain;}
+.lb-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:50%;width:40px;height:40px;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* FORMS */
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-weight:700;font-size:.85rem;margin-bottom:5px;color:var(--ink);}
+.fg label .req{color:var(--coral);}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 14px;border:2px solid #e8ddd8;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.92rem;background:#fafaf8;transition:border-color .2s;color:var(--ink);}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--sky);background:#fff;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:480px){.frow{grid-template-columns:1fr;}}
+.r-row{display:flex;gap:8px;flex-wrap:wrap;}
+.r-chip{display:flex;align-items:center;gap:6px;background:#f5ece0;border:2px solid #e8ddd8;border-radius:10px;padding:7px 14px;cursor:pointer;transition:all .18s;font-weight:600;font-size:.85rem;}
+.r-chip:has(input:checked){background:#fff5ee;border-color:var(--coral);color:var(--coral);}
+.r-chip input{display:none;}
+.s-heading{font-weight:800;font-size:.9rem;color:var(--coral);padding:8px 0 10px;margin-bottom:12px;border-bottom:2px dashed rgba(244,91,59,.25);display:flex;align-items:center;gap:7px;}
+.info-note{background:#fffbeb;border:2px solid var(--gold);border-radius:10px;padding:10px 14px;font-size:.82rem;font-weight:600;margin-bottom:14px;display:flex;align-items:flex-start;gap:7px;}
+.alert{border-radius:12px;padding:14px 18px;margin-bottom:14px;font-weight:600;font-size:.88rem;display:flex;align-items:flex-start;gap:10px;}
+.alert-s{background:#e8fbe8;border:2px solid var(--sage);color:#1a5e2e;}
+.alert-e{background:#fff0ee;border:2px solid var(--coral);color:#8b1a1a;}
+.alert-i{background:#eff6ff;border:2px solid var(--sky);color:#1a3a8b;}
+
+/* PLAN GRID */
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;}
+.pc{border:2.5px solid #e8ddd8;border-radius:var(--r);padding:20px 16px;text-align:center;cursor:pointer;transition:all .22s;background:#fff;position:relative;overflow:hidden;}
+.pc.selected{border-color:var(--coral);box-shadow:0 0 0 3px rgba(244,91,59,.18);}
+.pc .ribbon{display:none;position:absolute;top:12px;right:-20px;background:var(--gold);color:#fff;font-size:.62rem;font-weight:800;padding:4px 28px;transform:rotate(45deg);}
+.pc.popular .ribbon{display:block;}
+.pc .pi{font-size:2rem;margin-bottom:8px;}
+.pc .pn{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;margin-bottom:4px;}
+.pc .pd{font-size:.78rem;color:#7a6560;margin-bottom:8px;}
+.pc .pp{font-size:1.5rem;font-weight:900;color:var(--coral);}
+
+/* UPLOAD */
+.upzone{border:2.5px dashed #e8ddd8;border-radius:var(--r);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:#fafaf8;}
+.upzone:hover{border-color:var(--sky);background:#f0f7ff;}
+.upzone input{display:none;}
+.up-preview{margin-top:10px;display:none;}
+
+/* DASHBOARD */
+.dash-hero{background:linear-gradient(135deg,#1c1412 0%,#3d2218 60%,#5a3020 100%);color:#fff;padding:28px 20px;position:relative;overflow:hidden;}
+.dash-hero::after{content:'🎨';position:absolute;right:20px;bottom:-10px;font-size:6rem;opacity:.12;}
+.dash-hero .dname{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:900;margin-bottom:4px;}
+.dash-hero .dpill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;font-size:.82rem;font-weight:700;margin-bottom:12px;}
+.dash-hero .dmeta{display:flex;gap:18px;flex-wrap:wrap;font-size:.82rem;opacity:.8;}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:16px;}
+.sb{background:#fff;border-radius:var(--r);padding:16px;text-align:center;box-shadow:var(--shadow);border-bottom:4px solid var(--coral);}
+.sb .num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;}
+.sb .lbl{font-size:.72rem;color:#7a6560;font-weight:700;margin-top:3px;}
+.prog-track{background:#f0e8e0;border-radius:20px;overflow:hidden;height:18px;margin-bottom:6px;}
+.prog-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--sage),var(--sky));transition:width .8s ease;}
+.nc-card{background:linear-gradient(135deg,var(--violet),#a855f7);color:#fff;border-radius:var(--r-lg);padding:22px;margin-bottom:16px;position:relative;overflow:hidden;}
+.nc-card::before{content:'📅';position:absolute;right:20px;top:15px;font-size:3.5rem;opacity:.2;}
+.nc-card h4{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:6px;}
+.nc-card .tbig{font-size:1.6rem;font-weight:900;margin:4px 0;}
+.nc-card .rnote{font-size:.8rem;opacity:.85;margin-top:10px;background:rgba(255,255,255,.15);padding:7px 12px;border-radius:8px;}
+.skill-card{background:linear-gradient(135deg,var(--gold),#f97316);color:#fff;border-radius:var(--r-lg);padding:20px;margin-bottom:16px;}
+.skill-card h4{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:8px;}
+.skill-track{display:flex;align-items:center;background:rgba(255,255,255,.2);border-radius:30px;overflow:hidden;padding:3px;}
+.sk-step{flex:1;text-align:center;padding:5px 4px;border-radius:26px;font-size:.72rem;font-weight:700;color:rgba(255,255,255,.6);}
+.sk-step.act{background:#fff;color:var(--gold);}
+.sk-step.done{color:rgba(255,255,255,.9);}
+.skill-curr{margin-top:10px;font-size:.88rem;font-weight:700;}
+.att-table{width:100%;border-collapse:collapse;font-size:.85rem;}
+.att-table th{background:var(--ink);color:#fff;padding:9px 14px;text-align:left;}
+.att-table td{padding:9px 14px;border-bottom:1px solid #f0e8e0;}
+.att-table tr:hover td{background:#fdfaf7;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:.73rem;font-weight:700;}
+.bg-g{background:#e8fbe8;color:#1a5e2e;}
+.bg-r{background:#fff0ee;color:#8b1a1a;}
+.bg-y{background:#fffbeb;color:#7a4a00;}
+
+/* ADMIN */
+.adm-hdr{background:linear-gradient(135deg,var(--ink),#3d2218);color:#fff;padding:24px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.adm-hdr h1{font-family:'Fraunces',serif;font-size:1.5rem;}
+.adm-wrap{max-width:900px;margin:0 auto;padding:16px;}
+.adm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px;}
+.adm-stat{background:#fff;border-radius:var(--r);padding:18px;text-align:center;box-shadow:var(--shadow);}
+.adm-stat .big{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;}
+.adm-stat .lbl{font-size:.75rem;color:#7a6560;font-weight:700;}
+.tab-bar{display:flex;gap:7px;margin-bottom:18px;flex-wrap:wrap;}
+.tab-btn{padding:8px 16px;border-radius:20px;border:2px solid #e8ddd8;background:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .2s;color:var(--ink);}
+.tab-btn.act{background:var(--ink);color:#fff;border-color:var(--ink);}
+.tab-pane{display:none;}
+.tab-pane.act{display:block;}
+.s-row{background:#fff;border-radius:var(--r);padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 10px rgba(28,20,18,.06);display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;border-left:4px solid var(--coral);}
+.s-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:#fff;flex-shrink:0;}
+.s-info{flex:1;min-width:150px;}
+.s-info strong{display:block;font-size:.95rem;margin-bottom:2px;}
+.s-info span{font-size:.78rem;color:#7a6560;}
+.s-acts{display:flex;gap:7px;align-items:center;flex-wrap:wrap;}
+.s-row-search{display:flex;gap:8px;margin-bottom:14px;}
+.s-row-search input{flex:1;padding:9px 14px;border:2px solid #e8ddd8;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;}
+.s-row-search input:focus{outline:none;border-color:var(--sky);}
+
+/* PLANS PAGE */
+.plans-hero{background:linear-gradient(135deg,var(--ink) 0%,#3a2010 100%);color:#fff;padding:50px 20px 30px;text-align:center;}
+.plans-hero h1{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;margin-bottom:6px;}
+.rule-block{background:#fff;border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:14px;border-left:5px solid var(--sky);}
+.rule-block h3{font-weight:800;font-size:.95rem;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.rule-block ul{list-style:none;}
+.rule-block ul li{padding:5px 0;font-size:.9rem;border-bottom:1px solid #f5ece0;}
+.rule-block ul li::before{content:'→ ';color:var(--coral);font-weight:800;}
+.contact-card{background:#fff;border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow-lg);text-align:center;border-top:6px solid var(--coral);}
+
+/* MODALS */
+.modal-bg{position:fixed;inset:0;background:rgba(15,10,8,.65);backdrop-filter:blur(6px);z-index:300;display:none;align-items:center;justify-content:center;padding:16px;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;border-radius:var(--r-lg);padding:26px 22px;width:100%;max-width:480px;box-shadow:var(--shadow-lg);animation:modalPop .3s ease;}
+@keyframes modalPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.m-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.m-head h2{font-family:'Fraunces',serif;font-size:1.3rem;}
+.m-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#aaa;line-height:1;}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:30px;font-weight:700;font-size:.88rem;box-shadow:var(--shadow-lg);z-index:999;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 32px);}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+/* GALLERY ADD ZONE */
+.gal-add-zone{border:2.5px dashed rgba(244,91,59,.4);border-radius:var(--r);padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:#fff9f5;display:block;margin-bottom:16px;}
+.gal-add-zone:hover{border-color:var(--coral);background:#fff5ee;}
+.gal-add-zone input{display:none;}
+
+@media(max-width:600px){
+  .adm-hdr{text-align:center;justify-content:center;}
+  .s-row{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav" style="display:none">
+  <div class="nav-logo" onclick="go('home')"><span>🎨</span> Meghna's Art Classes</div>
+  <div class="nav-pills">
+    <button class="np" onclick="go('home')">🏠 Home</button>
+    <button class="np" onclick="go('plans')">💰 Plans</button>
+    <button class="np" onclick="go('rules')">📜 Rules</button>
+    <button class="np" onclick="go('contact')">📞 Contact</button>
+    <button class="np" id="npLogin" onclick="openM('loginM')">👤 Login</button>
+    <button class="np" id="npLogout" style="display:none" onclick="doLogout()">🚪 Logout</button>
+  </div>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-deco" id="heroDeco"></div>
+    <div class="hero-badge">🖌️ Enrolling Now — Batches Open!</div>
+    <h1>Meghna's<br><em>Art Classes</em></h1>
+    <p class="hero-sub">"Where creativity and imagination grow."</p>
+    <div class="hero-btns">
+      <button class="btn btn-coral" onclick="go('register')">📝 Register Student</button>
+      <button class="btn btn-gold" onclick="openM('loginM')">👤 Student Login</button>
+      <button class="btn btn-ghost" onclick="go('plans')">💰 Class Plans</button>
+      <button class="btn btn-ghost" onclick="go('rules')">📜 Rules</button>
+      <button class="btn btn-ghost" onclick="go('contact')">📞 Contact</button>
+    </div>
+    <p style="margin-top:20px;font-size:.75rem;color:#aaa">Admin? <a href="#" onclick="openM('adminLoginM')" style="color:var(--coral)">Owner Login →</a></p>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gal-sec" id="galSec">
+    <div class="gal-header">
+      <div>
+        <div class="sec-title">🖼️ Student Artwork Gallery</div>
+        <p class="sec-sub" style="margin-bottom:0">Creativity blooming in every stroke!</p>
+      </div>
+      <div id="galAdminBtns" style="display:none">
+        <label class="btn btn-coral btn-sm" for="galUploadInput" style="cursor:pointer">
+          ➕ Add Artwork
+          <input type="file" id="galUploadInput" accept="image/*" multiple style="display:none" onchange="addGalImages(this)">
+        </label>
+      </div>
+    </div>
+    <div class="gal-grid" id="galGrid"></div>
+  </div>
+</div>
+
+<!-- ===== REGISTER ===== -->
+<div class="page" id="page-register">
+  <div class="wrap">
+    <div class="sec-title">📝 Register Student</div>
+    <p class="sec-sub">Fill in the details and we'll confirm your batch timing soon!</p>
+    <div id="regOk" class="alert alert-s" style="display:none">
+      🎉 <div><strong>Thank you for registering for Meghna's Art Classes!</strong><br>We will contact you soon to confirm your batch timing.</div>
+    </div>
+    <div id="regBody">
+      <div class="card" style="border-top:5px solid var(--coral)">
+        <div class="s-heading">👦 Student Information</div>
+        <div class="fg"><label>Student Full Name <span class="req">*</span></label><input type="text" id="r_name" placeholder="Student's full name"></div>
+        <div class="frow">
+          <div class="fg"><label>Age <span class="req">*</span></label><input type="number" id="r_age" placeholder="e.g. 10" min="3" max="25"></div>
+          <div class="fg"><label>Standard / Grade <span class="req">*</span></label><input type="text" id="r_std" placeholder="e.g. 5th Std"></div>
+        </div>
+        <div class="fg"><label>School Name</label><input type="text" id="r_school" placeholder="School name (optional)"></div>
+      </div>
+      <div class="card">
+        <div class="s-heading">👨‍👩‍👧 Parent / Guardian</div>
+        <div class="fg"><label>Parent / Guardian Name <span class="req">*</span></label><input type="text" id="r_parent" placeholder="Parent's full name"></div>
+        <div class="frow">
+          <div class="fg"><label>WhatsApp Number <span class="req">*</span></label><input type="tel" id="r_phone" placeholder="10-digit number"></div>
+          <div class="fg"><label>Email Address</label><input type="email" id="r_email" placeholder="Optional"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="s-heading">🎭 Art Experience</div>
+        <div class="fg">
+          <label>Has the student learned art before? <span class="req">*</span></label>
+          <div class="r-row">
+            <label class="r-chip"><input type="radio" name="artBefore" value="Yes"> ✅ Yes</label>
+            <label class="r-chip"><input type="radio" name="artBefore" value="No"> 🌱 No</label>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Skill Level <span class="req">*</span></label>
+          <div class="r-row">
+            <label class="r-chip"><input type="radio" name="skill" value="Beginner"> 🌱 Beginner</label>
+            <label class="r-chip"><input type="radio" name="skill" value="Intermediate"> 🌿 Intermediate</label>
+            <label class="r-chip"><input type="radio" name="skill" value="Advanced"> 🌳 Advanced</label>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="s-heading">🖼️ Upload Artwork (Optional)</div>
+        <div class="upzone" onclick="document.getElementById('artworkUp').click()">
+          <div style="font-size:2rem;margin-bottom:6px">🖌️</div>
+          <p style="font-size:.88rem;font-weight:600;color:#7a6560">Click to upload student's artwork</p>
+          <p style="font-size:.75rem;color:#baa89a;margin-top:3px">JPEG, PNG — max 5MB</p>
+          <input type="file" id="artworkUp" accept="image/*" onchange="previewArt(this)">
+        </div>
+        <div class="up-preview" id="artPrev">
+          <img id="artPrevImg" src="" alt="Preview" style="max-height:120px;border-radius:8px;margin:8px auto;">
+          <p style="font-size:.78rem;color:var(--sage);text-align:center;font-weight:600">✅ Ready to submit</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="s-heading">📅 Availability</div>
+        <div class="fg">
+          <label>Preferred Days <span class="req">*</span></label>
+          <div class="r-row">
+            <label class="r-chip"><input type="radio" name="days" value="Weekdays"> Weekdays</label>
+            <label class="r-chip"><input type="radio" name="days" value="Weekends"> Weekends</label>
+            <label class="r-chip"><input type="radio" name="days" value="Flexible"> Flexible</label>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Preferred Time <span class="req">*</span></label>
+          <div class="r-row">
+            <label class="r-chip"><input type="radio" name="time" value="Morning"> 🌅 Morning</label>
+            <label class="r-chip"><input type="radio" name="time" value="Afternoon"> ☀️ Afternoon</label>
+            <label class="r-chip"><input type="radio" name="time" value="Evening"> 🌙 Evening</label>
+            <label class="r-chip"><input type="radio" name="time" value="Flexible"> Flexible</label>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-top:5px solid var(--gold)">
+        <div class="s-heading">💰 Select Your Plan <span class="req">*</span></div>
+        <div class="info-note">ℹ️ <strong>1 Term = 1 Hour</strong> &nbsp;|&nbsp; Students attend 2–3 classes per week</div>
+        <div class="plan-grid">
+          <div class="pc" onclick="pickPlan(this,'Starter Plan','12 Terms / Month','1000',12)">
+            <div class="pi">🌱</div>
+            <div class="pn">Starter Plan</div>
+            <div class="pd">12 Terms / Month</div>
+            <div class="pp">₹1,000</div>
+          </div>
+          <div class="pc popular" onclick="pickPlan(this,'Popular Plan','24 Terms / 3 Months','2400',24)">
+            <div class="ribbon">POPULAR</div>
+            <div class="pi">⭐</div>
+            <div class="pn">Popular Plan</div>
+            <div class="pd">24 Terms / 3 Months</div>
+            <div class="pp">₹2,400</div>
+          </div>
+          <div class="pc" onclick="pickPlan(this,'Master Plan','36 Terms / 3 Months','3000',36)">
+            <div class="pi">👑</div>
+            <div class="pn">Master Plan</div>
+            <div class="pd">36 Terms / 3 Months</div>
+            <div class="pp">₹3,000</div>
+            <div style="font-size:.7rem;color:var(--sage);font-weight:700;margin-top:3px">BEST SAVING</div>
+          </div>
+        </div>
+        <input type="hidden" id="selPlan"><input type="hidden" id="selTerms">
+      </div>
+      <div id="regErr" class="alert alert-e" style="display:none">⚠️ Please fill all required fields and select a plan.</div>
+      <button class="btn btn-coral btn-full" onclick="submitReg()" style="margin-bottom:30px">🎨 Submit Registration</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="page" id="page-dashboard">
+  <div class="dash-hero">
+    <div style="font-size:.8rem;opacity:.6;margin-bottom:3px">Welcome back! 👋</div>
+    <div class="dname" id="dName">-</div>
+    <div class="dpill" id="dPlan">-</div>
+    <div class="dmeta">
+      <span>📅 Started: <strong id="dStart">-</strong></span>
+      <span>⏰ Expires: <strong id="dExpiry">-</strong></span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="nc-card">
+      <h4>📅 Next Class</h4>
+      <div class="tbig" id="ncTime">Saturday — 5:00 PM – 7:00 PM</div>
+      <div style="font-size:.82rem;opacity:.8">Duration: 2 hours</div>
+      <div class="rnote">🎒 Don't forget to bring your art materials!</div>
+    </div>
+    <div class="skill-card">
+      <h4>🏅 Skill Level Progress</h4>
+      <div class="skill-track">
+        <div class="sk-step" id="sk0">🌱 Beginner</div>
+        <div class="sk-step" id="sk1">🌿 Intermediate</div>
+        <div class="sk-step" id="sk2">🌳 Advanced</div>
+      </div>
+      <div class="skill-curr" id="skCurr"></div>
+    </div>
+    <div class="stats-row">
+      <div class="sb" style="border-color:var(--sky)"><div class="num" id="dTotal" style="color:var(--sky)">-</div><div class="lbl">Total Terms</div></div>
+      <div class="sb" style="border-color:var(--coral)"><div class="num" id="dUsed" style="color:var(--coral)">-</div><div class="lbl">Used Terms</div></div>
+      <div class="sb" style="border-color:var(--sage)"><div class="num" id="dRem" style="color:var(--sage)">-</div><div class="lbl">Remaining</div></div>
+    </div>
+    <div class="card">
+      <strong style="display:flex;align-items:center;gap:7px;margin-bottom:10px">📈 Terms Progress</strong>
+      <div class="prog-track"><div class="prog-fill" id="dProg" style="width:0%"></div></div>
+      <p style="font-size:.78rem;color:#7a6560;text-align:right" id="dProgLbl">-</p>
+    </div>
+    <div class="card">
+      <strong style="display:flex;align-items:center;gap:7px;margin-bottom:14px">📅 Attendance History</strong>
+      <div id="dAttLog"><div style="text-align:center;padding:30px;color:#baa89a"><div style="font-size:2.5rem">📋</div><p>No classes recorded yet.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PLANS ===== -->
+<div class="page" id="page-plans">
+  <div class="plans-hero">
+    <div style="font-size:3rem;margin-bottom:10px">💰</div>
+    <h1>Class Plans</h1>
+    <p style="opacity:.75;max-width:420px;margin:0 auto">Choose the perfect plan for your child's artistic journey</p>
+  </div>
+  <div class="wrap">
+    <div class="plan-grid" style="margin-bottom:20px">
+      <div style="border:2px solid var(--sage);border-top:5px solid var(--sage);border-radius:var(--r);padding:22px;background:#fff;text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:8px">🌱</div>
+        <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;margin-bottom:4px">Starter Plan</div>
+        <div style="font-size:.8rem;color:#7a6560;margin-bottom:8px">12 Terms / Month</div>
+        <div style="font-size:1.6rem;font-weight:900;color:var(--sage)">₹1,000</div>
+        <ul style="list-style:none;text-align:left;margin:14px 0;font-size:.82rem">
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ 12 terms per month</li>
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ 2 classes per week</li>
+          <li style="padding:4px 0">✓ Attendance tracking</li>
+        </ul>
+        <button class="btn btn-sage btn-full btn-sm" onclick="go('register')">Get Started</button>
+      </div>
+      <div style="border:2px solid var(--gold);border-top:5px solid var(--gold);border-radius:var(--r);padding:22px;background:#fff;text-align:center;position:relative;overflow:hidden">
+        <div style="position:absolute;top:12px;right:-20px;background:var(--gold);color:#fff;font-size:.62rem;font-weight:800;padding:4px 28px;transform:rotate(45deg)">POPULAR</div>
+        <div style="font-size:2.5rem;margin-bottom:8px">⭐</div>
+        <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;margin-bottom:4px">Popular Plan</div>
+        <div style="font-size:.8rem;color:#7a6560;margin-bottom:8px">24 Terms / 3 Months</div>
+        <div style="font-size:1.6rem;font-weight:900;color:var(--gold)">₹2,400</div>
+        <ul style="list-style:none;text-align:left;margin:14px 0;font-size:.82rem">
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ 24 terms / 3 months</li>
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ 2–3 classes/week</li>
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ Best monthly value</li>
+          <li style="padding:4px 0">✓ Attendance tracking</li>
+        </ul>
+        <button class="btn btn-gold btn-full btn-sm" onclick="go('register')">Get Started</button>
+      </div>
+      <div style="border:2px solid var(--violet);border-top:5px solid var(--violet);border-radius:var(--r);padding:22px;background:#fff;text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:8px">👑</div>
+        <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;margin-bottom:4px">Master Plan</div>
+        <div style="font-size:.8rem;color:#7a6560;margin-bottom:4px">36 Terms / 3 Months</div>
+        <div style="font-size:.7rem;color:var(--sage);font-weight:700;margin-bottom:8px">BEST SAVING</div>
+        <div style="font-size:1.6rem;font-weight:900;color:var(--violet)">₹3,000</div>
+        <ul style="list-style:none;text-align:left;margin:14px 0;font-size:.82rem">
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ 36 terms / 3 months</li>
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ 3 classes per week</li>
+          <li style="padding:4px 0;border-bottom:1px solid #f0f0f0">✓ Maximum progress</li>
+          <li style="padding:4px 0">✓ Attendance tracking</li>
+        </ul>
+        <button class="btn btn-violet btn-full btn-sm" onclick="go('register')">Get Started</button>
+      </div>
+    </div>
+    <div class="info-note">ℹ️ <strong>1 Term = 1 Hour</strong> &nbsp;|&nbsp; Students attend 2–3 classes per week as per plan</div>
+  </div>
+</div>
+
+<!-- ===== RULES ===== -->
+<div class="page" id="page-rules">
+  <div class="wrap">
+    <div class="sec-title">📜 Class Rules</div>
+    <p class="sec-sub">Everything you need to know before joining.</p>
+    <div class="rule-block" style="border-color:var(--sky)"><h3>🏛️ Class Structure</h3><ul><li>1 Term = 1 Hour of class</li><li>Students attend 2–3 classes per week</li><li>Batch timings assigned after registration</li><li>Students grouped by age and skill level</li></ul></div>
+    <div class="rule-block" style="border-color:var(--coral)"><h3>📅 Attendance Policy</h3><ul><li>Missed classes can be adjusted within the plan period</li><li>Classes cannot be carried forward after plan expires</li><li>Please inform 1 hour before a missed class</li><li>Make-up classes subject to availability</li></ul></div>
+    <div class="rule-block" style="border-color:var(--sage)"><h3>🎨 Art Supplies</h3><ul><li>Basic supplies provided during class</li><li>Students may bring their own materials</li><li>Recommended supply list shared on enrollment</li></ul></div>
+    <div class="rule-block" style="border-color:var(--gold)"><h3>💳 Payment Policy</h3><ul><li>Payment due before plan start date</li><li>Plans non-refundable once started</li><li>WhatsApp Meghna for payment confirmation</li></ul></div>
+  </div>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div class="page" id="page-contact">
+  <div class="wrap">
+    <div class="sec-title">📞 Contact Us</div>
+    <p class="sec-sub">We'd love to hear from you!</p>
+    <div class="contact-card">
+      <div style="font-size:4rem;margin-bottom:14px">🎨</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:1.6rem;margin-bottom:6px">Meghna's Art Classes</h2>
+      <p style="color:#7a6560;margin-bottom:4px">🕐 Monday – Saturday: 4:00 PM – 7:00 PM</p>
+      <p style="color:#7a6560;margin-bottom:20px">📍 Batch timings confirmed after registration</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="https://wa.me/917021486659?text=Hi%20Meghna!%20I'm%20interested%20in%20Art%20Classes" target="_blank" class="btn btn-sage">💬 WhatsApp</a>
+        <a href="tel:+917021486659" class="btn btn-sky">📞 Call Now</a>
+        <a href="https://www.instagram.com/meghnas_artclass?utm_source=qr&igsh=ZzI2bTQyOHdoMWd0" target="_blank" class="btn btn-violet">📸 Instagram</a>
+      </div>
+      <p style="margin-top:20px;font-size:.75rem;color:#ccc"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADMIN ===== -->
+<div class="page" id="page-admin">
+  <div class="adm-hdr">
+    <div><p style="font-size:.75rem;opacity:.6">🔐 Owner Panel</p><h1>🎨 Meghna's Dashboard</h1></div>
+    <button class="btn btn-ghost btn-sm" onclick="doLogout()">🚪 Logout</button>
+  </div>
+  <div class="adm-wrap">
+    <div class="adm-stats">
+      <div class="adm-stat"><div class="big" id="aS1" style="color:var(--sky)">0</div><div class="lbl">Students</div></div>
+      <div class="adm-stat"><div class="big" id="aS2" style="color:var(--sage)">0</div><div class="lbl">Active Plans</div></div>
+      <div class="adm-stat"><div class="big" id="aS3" style="color:var(--coral)">0</div><div class="lbl">Today's Classes</div></div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn act" onclick="aTab('reg',this)">📋 Registrations</button>
+      <button class="tab-btn" onclick="aTab('att',this)">📅 Attendance</button>
+      <button class="tab-btn" onclick="aTab('gal',this)">🖼️ Gallery</button>
+    </div>
+    <!-- REGISTRATIONS -->
+    <div class="tab-pane act" id="aT-reg">
+      <div class="s-row-search">
+        <input type="text" id="aQ" placeholder="🔍 Search name or phone..." oninput="renderAdminList()">
+        <button class="btn btn-dark btn-sm" onclick="exportCSV()">📥 CSV</button>
+      </div>
+      <div id="aList"></div>
+    </div>
+    <!-- ATTENDANCE -->
+    <div class="tab-pane" id="aT-att">
+      <div class="fg"><label>Select Student</label>
+        <select id="attSel" onchange="loadAttS()"><option value="">-- Choose a student --</option></select>
+      </div>
+      <div id="attPanel" style="display:none">
+        <div class="stats-row" id="attStats" style="grid-template-columns:repeat(3,1fr)"></div>
+        <div class="card" style="margin-bottom:12px"><div class="prog-track"><div class="prog-fill" id="attProg"></div></div></div>
+        <div class="card" style="margin-bottom:14px">
+          <strong style="display:block;margin-bottom:12px">📅 Attendance Log</strong>
+          <table class="att-table"><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody id="attLog"></tbody></table>
+        </div>
+        <div class="frow" style="margin-bottom:10px">
+          <button class="btn btn-sage btn-full" onclick="markAtt('Attended')">✅ Attended</button>
+          <button class="btn btn-coral btn-full" onclick="markAtt('Missed')">❌ Missed</button>
+        </div>
+        <div class="frow" style="margin-bottom:10px">
+          <button class="btn btn-sky btn-full" onclick="markAtt('Make-up')">🔄 Make-up</button>
+          <button class="btn btn-gold btn-full" onclick="addBonus()">➕ Bonus +2 Terms</button>
+        </div>
+        <div class="fg">
+          <label>Next Class Schedule</label>
+          <div class="frow">
+            <input type="text" id="ncDay" placeholder="e.g. Saturday">
+            <input type="text" id="ncTime" placeholder="e.g. 5:00 PM – 7:00 PM">
+          </div>
+          <button class="btn btn-violet btn-full btn-sm" style="margin-top:8px" onclick="saveNextClass()">💾 Save Schedule</button>
+        </div>
+        <div class="fg">
+          <label>Update Skill Level</label>
+          <select id="skSel"><option value="Beginner">🌱 Beginner</option><option value="Intermediate">🌿 Intermediate</option><option value="Advanced">🌳 Advanced</option></select>
+          <button class="btn btn-gold btn-full btn-sm" style="margin-top:8px" onclick="updateSkill()">🏅 Update Skill</button>
+        </div>
+      </div>
+    </div>
+    <!-- GALLERY MGMT -->
+    <div class="tab-pane" id="aT-gal">
+      <div class="alert alert-i" style="margin-bottom:14px">🖼️ Upload student artworks to display on the home page gallery.</div>
+      <label class="gal-add-zone" for="aGalUp">
+        <div style="font-size:2.5rem;margin-bottom:6px">🖌️</div>
+        <p style="font-weight:700;font-size:.9rem">Click to upload artwork images</p>
+        <p style="font-size:.75rem;color:#baa89a;margin-top:4px">JPEG, PNG — multiple files allowed</p>
+        <input type="file" id="aGalUp" accept="image/*" multiple style="display:none" onchange="addGalImages(this)">
+      </label>
+      <div class="gal-grid admin-mode" id="aGalGrid" style="max-width:100%"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-bg" id="loginM">
+  <div class="modal">
+    <div class="m-head"><h2>👤 Student Login</h2><button class="m-close" onclick="closeM('loginM')">✕</button></div>
+    <div class="alert alert-i" style="font-size:.82rem">Enter the phone or email used during registration.</div>
+    <div class="fg"><label>Phone or Email</label><input type="text" id="loginVal" placeholder="Phone number or email" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div id="loginErr" class="alert alert-e" style="display:none">⚠️ Student not found. Please register first.</div>
+    <button class="btn btn-coral btn-full" onclick="doLogin()" style="margin-top:8px">🎨 Login</button>
+    <p style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa">Not registered? <a href="#" onclick="closeM('loginM');go('register')" style="color:var(--coral)">Register here →</a></p>
+  </div>
+</div>
+
+<div class="modal-bg" id="adminLoginM">
+  <div class="modal">
+    <div class="m-head"><h2>🔐 Owner Login</h2><button class="m-close" onclick="closeM('adminLoginM')">✕</button></div>
+    <div class="fg"><label>Username</label><input type="text" id="aUser" placeholder onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+    <div class="fg"><label>Password</label><input type="password" id="aPass" placeholder onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+    <div id="adminLoginErr" class="alert alert-e" style="display:none">⚠️ Incorrect credentials.</div>
+    <button class="btn btn-dark btn-full" onclick="doAdminLogin()" style="margin-top:8px">🔓 Login</button>
+    <p style="text-align:center;margin-top:10px;font-size:.75rem;color:#baa89a"></p>
+  </div>
+</div>
+
+<div class="modal-bg" id="editM">
+  <div class="modal" style="max-width:520px">
+    <div class="m-head"><h2>✏️ Edit Student</h2><button class="m-close" onclick="closeM('editM')">✕</button></div>
+    <div id="editBody"></div>
+    <button class="btn btn-coral btn-full" onclick="saveEdit()" style="margin-top:12px">💾 Save Changes</button>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLB()">
+  <button class="lb-close">✕</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<div class="toast" id="toast">✅ Done!</div>
+
+<script>
+// ============ DATA ============
+let DB={
+  students:JSON.parse(localStorage.getItem('mac3_students')||'[]'),
+  gallery:JSON.parse(localStorage.getItem('mac3_gallery')||'[]')
+};
+function save(){localStorage.setItem('mac3_students',JSON.stringify(DB.students));localStorage.setItem('mac3_gallery',JSON.stringify(DB.gallery));}
+const ADMIN={u:'meghna',p:'art2024'};
+const PT={'Starter Plan':12,'Popular Plan':24,'Master Plan':36};
+const PM={'Starter Plan':1,'Popular Plan':3,'Master Plan':3};
+let CU=null,editId=null,selPD={};
+
+// ============ HERO DECO ============
+(function(){
+  const icons=['🎨','🖌️','✏️','🖼️','🌈','🎭','🖍️','🖊️','🎪','🌟'];
+  const d=document.getElementById('heroDeco');
+  for(let i=0;i<14;i++){
+    const s=document.createElement('span');
+    s.textContent=icons[i%icons.length];
+    s.style.cssText=`left:${Math.random()*100}%;top:${75+Math.random()*25}%;animation-duration:${8+Math.random()*14}s;animation-delay:${-Math.random()*12}s;font-size:${1.5+Math.random()*1.8}rem;`;
+    d.appendChild(s);
+  }
+})();
+
+// ============ NAV ============
+function go(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('mainNav').style.display='flex';
+  window.scrollTo(0,0);
+  if(p==='dashboard') renderDash();
+  if(p==='admin') renderAdmin();
+}
+
+// ============ GALLERY ============
+function renderGallery(){
+  ['galGrid','aGalGrid'].forEach((gid,idx)=>{
+    const g=document.getElementById(gid); if(!g) return;
+    const isAdm=idx===1;
+    if(!DB.gallery.length){
+      g.innerHTML=`<div class="gal-ph"><div style="font-size:3rem">🎨</div><p>No artworks yet!</p><p style="font-size:.8rem;margin-top:4px;color:#ccc">${isAdm?'Upload images using the button above.':'Admin will add artworks here.'}</p></div>`;
+      return;
+    }
+    g.innerHTML=DB.gallery.map((item,i)=>`
+      <div class="gal-item" onclick="if(!event.target.classList.contains('gal-del'))openLB('${item.src.substring(0,50)}...','${i}')">
+        <img src="${item.src}" alt="${item.label||'Artwork'}" loading="lazy">
+        <div class="gal-overlay"><span>${item.label||'Student Artwork'}</span></div>
+        <button class="gal-del" onclick="event.stopPropagation();delGal(${i})">✕</button>
+      </div>`).join('');
+    if(isAdm) g.querySelectorAll('.gal-del').forEach(b=>b.style.display='flex');
+  });
+}
+
+function addGalImages(inp){
+  const files=Array.from(inp.files); let done=0;
+  files.forEach(f=>{
+    const r=new FileReader();
+    r.onload=e=>{DB.gallery.push({src:e.target.result,label:'Student Artwork'});done++;if(done===files.length){save();renderGallery();toast('🖼️ '+files.length+' artwork(s) added!');}}
+    r.readAsDataURL(f);
+  });
+  inp.value='';
+}
+
+function delGal(i){if(!confirm('Remove artwork?'))return;DB.gallery.splice(i,1);save();renderGallery();toast('🗑️ Artwork removed.');}
+
+// Store full src separately for lightbox
+const lbSrcs=[];
+function openLB(src,i){
+  // Use actual src from DB
+  document.getElementById('lbImg').src=DB.gallery[parseInt(i)].src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+
+// ============ REGISTRATION ============
+function pickPlan(el,name,desc,price,terms){
+  document.querySelectorAll('.pc').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('selPlan').value=name;
+  document.getElementById('selTerms').value=terms;
+  selPD={name,desc,price,terms};
+}
+
+function previewArt(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{document.getElementById('artPrevImg').src=e.target.result;document.getElementById('artPrev').style.display='block';};
+  r.readAsDataURL(f);
+}
+
+function submitReg(){
+  const gv=id=>(document.getElementById(id)||{}).value?.trim()||'';
+  const radio=n=>{const c=document.querySelector(`input[name="${n}"]:checked`);return c?c.value:''};
+  const name=gv('r_name'),age=gv('r_age'),std=gv('r_std'),school=gv('r_school'),parent=gv('r_parent'),phone=gv('r_phone'),email=gv('r_email'),plan=gv('selPlan'),terms=gv('selTerms');
+  const artBefore=radio('artBefore'),skill=radio('skill'),days=radio('days'),time=radio('time');
+  if(!name||!age||!parent||!phone||!plan||!artBefore||!skill||!days||!time){document.getElementById('regErr').style.display='flex';return;}
+  document.getElementById('regErr').style.display='none';
+  const months=PM[plan]||1;
+  const start=new Date(),expiry=new Date();expiry.setMonth(expiry.getMonth()+months);
+  const artSrc=document.getElementById('artPrevImg').src||'';
+  const s={id:'S'+Date.now(),name,age,std,school,parent,phone,email,artBefore,skill,days,time,plan,planTerms:parseInt(terms),planPrice:selPD.price,startDate:start.toLocaleDateString('en-IN'),expiryDate:expiry.toLocaleDateString('en-IN'),registeredOn:start.toISOString(),attendance:[],usedTerms:0,bonusTerms:0,nextClassDay:'Saturday',nextClassTime:'5:00 PM – 7:00 PM',artSrc};
+  DB.students.push(s);
+  if(artSrc&&artSrc.startsWith('data:')){DB.gallery.push({src:artSrc,label:name+"'s Artwork"});}
+  save();renderGallery();
+  document.getElementById('regBody').style.display='none';
+  document.getElementById('regOk').style.display='flex';
+  toast('🎉 Registered successfully!');
+  setTimeout(()=>{document.getElementById('regBody').style.display='block';document.getElementById('regOk').style.display='none';resetReg();},6000);
+}
+
+function resetReg(){
+  ['r_name','r_age','r_std','r_school','r_parent','r_phone','r_email'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  document.querySelectorAll('.pc').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('selPlan').value='';document.getElementById('selTerms').value='';
+  document.getElementById('artPrev').style.display='none';selPD={};
+}
+
+// ============ AUTH ============
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+
+function doLogin(){
+  const v=document.getElementById('loginVal').value.trim().toLowerCase();
+  const s=DB.students.find(st=>st.phone===v||st.phone.replace(/\D/g,'')===v.replace(/\D/g,'')||(st.email&&st.email.toLowerCase()===v));
+  if(!s){document.getElementById('loginErr').style.display='flex';return;}
+  CU={id:s.id};closeM('loginM');
+  document.getElementById('npLogin').style.display='none';document.getElementById('npLogout').style.display='inline-flex';
+  go('dashboard');
+}
+
+function doAdminLogin(){
+  const u=document.getElementById('aUser').value.trim(),p=document.getElementById('aPass').value.trim();
+  if(u===ADMIN.u&&p===ADMIN.p){
+    CU={isAdmin:true};closeM('adminLoginM');
+    document.getElementById('npLogin').style.display='none';document.getElementById('npLogout').style.display='inline-flex';
+    document.getElementById('galAdminBtns').style.display='block';
+    renderGallery();go('admin');
+  } else {document.getElementById('adminLoginErr').style.display='flex';}
+}
+
+function doLogout(){
+  CU=null;
+  document.getElementById('npLogin').style.display='inline-flex';document.getElementById('npLogout').style.display='none';
+  document.getElementById('galAdminBtns').style.display='none';
+  renderGallery();go('home');
+}
+
+// ============ DASHBOARD ============
+function renderDash(){
+  if(!CU||CU.isAdmin){go('home');return;}
+  const s=DB.students.find(st=>st.id===CU.id);if(!s){go('home');return;}
+  const total=(s.planTerms||0)+(s.bonusTerms||0),used=s.usedTerms||0,rem=Math.max(0,total-used);
+  document.getElementById('dName').textContent=s.name;
+  document.getElementById('dPlan').textContent='📦 '+s.plan;
+  document.getElementById('dStart').textContent=s.startDate;
+  document.getElementById('dExpiry').textContent=s.expiryDate;
+  document.getElementById('dTotal').textContent=total;
+  document.getElementById('dUsed').textContent=used;
+  document.getElementById('dRem').textContent=rem;
+  const pct=total>0?Math.round((used/total)*100):0;
+  document.getElementById('dProg').style.width=pct+'%';
+  document.getElementById('dProgLbl').textContent=`${used} used of ${total} terms (${pct}%)`;
+  document.getElementById('ncTime').textContent=(s.nextClassDay||'Saturday')+' — '+(s.nextClassTime||'5:00 PM – 7:00 PM');
+  const lvl=['Beginner','Intermediate','Advanced'].indexOf(s.skill||'Beginner');
+  ['sk0','sk1','sk2'].forEach((id,i)=>{const el=document.getElementById(id);el.classList.remove('act','done');if(i===lvl)el.classList.add('act');else if(i<lvl)el.classList.add('done');});
+  document.getElementById('skCurr').textContent='Current Level: '+(s.skill||'Beginner')+' Artist 🎨';
+  const logs=s.attendance||[];
+  if(!logs.length){document.getElementById('dAttLog').innerHTML='<div style="text-align:center;padding:30px;color:#baa89a"><div style="font-size:2.5rem">📋</div><p>No classes recorded yet.</p></div>';return;}
+  let html='<table class="att-table"><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>';
+  logs.slice().reverse().forEach(l=>{const cls=l.status==='Attended'?'bg-g':l.status==='Make-up'?'bg-y':'bg-r';const ico=l.status==='Attended'?'✅':l.status==='Make-up'?'🔄':'❌';html+=`<tr><td>${l.date}</td><td><span class="badge ${cls}">${ico} ${l.status}</span></td></tr>`;});
+  html+='</tbody></table>';
+  document.getElementById('dAttLog').innerHTML=html;
+}
+
+// ============ ADMIN ============
+const avClrs=['#f45b3b','#3b82f6','#5aa67a','#7c3aed','#f5a623','#e11d48'];
+const avC=name=>avClrs[name.charCodeAt(0)%avClrs.length];
+
+function renderAdmin(){
+  document.getElementById('aS1').textContent=DB.students.length;
+  document.getElementById('aS2').textContent=DB.students.filter(s=>Math.max(0,(s.planTerms||0)+(s.bonusTerms||0)-(s.usedTerms||0))>0).length;
+  const today=new Date().toLocaleDateString('en-IN');
+  document.getElementById('aS3').textContent=DB.students.reduce((a,s)=>a+(s.attendance||[]).filter(l=>l.date===today).length,0);
+  renderAdminList();popAttSel();renderGallery();
+}
+
+function renderAdminList(){
+  const q=(document.getElementById('aQ')?.value||'').toLowerCase();
+  const list=DB.students.filter(s=>!q||s.name.toLowerCase().includes(q)||s.phone.includes(q));
+  const el=document.getElementById('aList');
+  if(!list.length){el.innerHTML='<div style="text-align:center;padding:30px;color:#baa89a"><div style="font-size:2.5rem">📝</div><p>No students found.</p></div>';return;}
+  el.innerHTML=list.map(s=>{
+    const total=(s.planTerms||0)+(s.bonusTerms||0),used=s.usedTerms||0,rem=Math.max(0,total-used);
+    return `<div class="s-row">
+      <div class="s-av" style="background:${avC(s.name)}">${s.name[0]}</div>
+      <div class="s-info">
+        <strong>${s.name}</strong>
+        <span>Age ${s.age} &bull; ${s.school||'—'} &bull; Std ${s.std}</span><br>
+        <span>📞 ${s.phone} &bull; 📧 ${s.email||'—'}</span><br>
+        <span>📦 ${s.plan} &bull; ₹${s.planPrice} &bull; 🏅 ${s.skill||'Beginner'}</span><br>
+        <span>🎯 ${used}/${total} terms &bull; ${rem} remaining &bull; ${s.days}, ${s.time}</span><br>
+        <span>📅 ${new Date(s.registeredOn).toLocaleDateString('en-IN')} &bull; Art before: ${s.artBefore}</span>
+      </div>
+      <div class="s-acts">
+        <button class="btn btn-gold btn-sm" onclick="openEdit('${s.id}')">✏️ Edit</button>
+        <button class="btn btn-coral btn-sm" onclick="delS('${s.id}')">🗑️ Delete</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function delS(id){if(!confirm('Permanently delete this student?'))return;DB.students=DB.students.filter(s=>s.id!==id);save();renderAdmin();toast('🗑️ Student deleted.');}
+
+function aTab(name,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('act'));btn.classList.add('act');
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('act'));
+  document.getElementById('aT-'+name).classList.add('act');
+}
+
+function popAttSel(){
+  const sel=document.getElementById('attSel');
+  sel.innerHTML='<option value="">-- Choose a student --</option>'+DB.students.map(s=>`<option value="${s.id}">${s.name} (${s.phone})</option>`).join('');
+}
+
+function loadAttS(){
+  const id=document.getElementById('attSel').value,panel=document.getElementById('attPanel');
+  if(!id){panel.style.display='none';return;}
+  panel.style.display='block';
+  const s=DB.students.find(st=>st.id===id);
+  const total=(s.planTerms||0)+(s.bonusTerms||0),used=s.usedTerms||0,rem=Math.max(0,total-used);
+  document.getElementById('attStats').innerHTML=`<div class="sb" style="border-color:var(--sky)"><div class="num" style="color:var(--sky)">${total}</div><div class="lbl">Total</div></div><div class="sb" style="border-color:var(--coral)"><div class="num" style="color:var(--coral)">${used}</div><div class="lbl">Used</div></div><div class="sb" style="border-color:var(--sage)"><div class="num" style="color:var(--sage)">${rem}</div><div class="lbl">Left</div></div>`;
+  const pct=total>0?Math.round((used/total)*100):0;
+  document.getElementById('attProg').style.width=pct+'%';
+  const logs=s.attendance||[];
+  const tbody=document.getElementById('attLog');
+  if(!logs.length){tbody.innerHTML='<tr><td colspan="2" style="text-align:center;color:#ccc;padding:12px">No records yet</td></tr>';return;}
+  tbody.innerHTML=logs.slice().reverse().map(l=>{const cls=l.status==='Attended'?'bg-g':l.status==='Make-up'?'bg-y':'bg-r';const ico=l.status==='Attended'?'✅':l.status==='Make-up'?'🔄':'❌';return`<tr><td>${l.date}</td><td><span class="badge ${cls}">${ico} ${l.status}</span></td></tr>`;}).join('');
+  document.getElementById('skSel').value=s.skill||'Beginner';
+  document.getElementById('ncDay').value=s.nextClassDay||'';
+  document.getElementById('ncTime').value=s.nextClassTime||'';
+}
+
+function markAtt(status){
+  const id=document.getElementById('attSel').value;if(!id)return;
+  const s=DB.students.find(st=>st.id===id);
+  if(!s.attendance)s.attendance=[];
+  s.attendance.push({date:new Date().toLocaleDateString('en-IN'),status});
+  if(status==='Attended')s.usedTerms=(s.usedTerms||0)+2;
+  save();loadAttS();renderAdmin();
+  toast(status==='Attended'?'✅ Attended! (–2 terms)':status==='Missed'?'❌ Missed class noted.':'🔄 Make-up recorded.');
+}
+
+function addBonus(){
+  const id=document.getElementById('attSel').value;if(!id)return;
+  const s=DB.students.find(st=>st.id===id);s.bonusTerms=(s.bonusTerms||0)+2;
+  save();loadAttS();renderAdmin();toast('➕ +2 bonus terms added!');
+}
+
+function saveNextClass(){
+  const id=document.getElementById('attSel').value;if(!id)return;
+  const s=DB.students.find(st=>st.id===id);
+  s.nextClassDay=document.getElementById('ncDay').value||'Saturday';
+  s.nextClassTime=document.getElementById('ncTime').value||'5:00 PM – 7:00 PM';
+  save();toast('📅 Next class saved!');
+}
+
+function updateSkill(){
+  const id=document.getElementById('attSel').value;if(!id)return;
+  const s=DB.students.find(st=>st.id===id);s.skill=document.getElementById('skSel').value;
+  save();toast('🏅 Skill updated to '+s.skill+'!');
+}
+
+function openEdit(id){
+  editId=id;const s=DB.students.find(st=>st.id===id);
+  document.getElementById('editBody').innerHTML=`
+    <div class="fg"><label>Name</label><input type="text" id="e_name" value="${s.name}"></div>
+    <div class="frow"><div class="fg"><label>Age</label><input type="number" id="e_age" value="${s.age}"></div><div class="fg"><label>Phone</label><input type="text" id="e_phone" value="${s.phone}"></div></div>
+    <div class="fg"><label>Email</label><input type="email" id="e_email" value="${s.email||''}"></div>
+    <div class="fg"><label>Parent Name</label><input type="text" id="e_parent" value="${s.parent}"></div>
+    <div class="fg"><label>Plan</label><select id="e_plan">${Object.keys(PT).map(p=>`<option value="${p}" ${p===s.plan?'selected':''}>${p} (${PT[p]} terms)</option>`).join('')}</select></div>
+    <div class="fg"><label>Skill Level</label><select id="e_skill">${['Beginner','Intermediate','Advanced'].map(sk=>`<option value="${sk}" ${sk===s.skill?'selected':''}>${sk}</option>`).join('')}</select></div>`;
+  openM('editM');
+}
+
+function saveEdit(){
+  const s=DB.students.find(st=>st.id===editId);
+  s.name=document.getElementById('e_name').value;s.age=document.getElementById('e_age').value;
+  s.phone=document.getElementById('e_phone').value;s.email=document.getElementById('e_email').value;
+  s.parent=document.getElementById('e_parent').value;
+  const np=document.getElementById('e_plan').value;if(np!==s.plan){s.plan=np;s.planTerms=PT[np];}
+  s.skill=document.getElementById('e_skill').value;
+  save();closeM('editM');renderAdmin();toast('💾 Student updated!');
+}
+
+function exportCSV(){
+  const h=['Name','Age','School','Std','Parent','Phone','Email','Plan','Price','Skill','Days','Time','Start','Expiry','UsedTerms','BonusTerms'];
+  const rows=DB.students.map(s=>[s.name,s.age,s.school,s.std,s.parent,s.phone,s.email,s.plan,s.planPrice,s.skill,s.days,s.time,s.startDate,s.expiryDate,s.usedTerms||0,s.bonusTerms||0]);
+  const csv=[h,...rows].map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='meghna_art_students.csv';a.click();
+  toast('📥 CSV exported!');
+}
+
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+
+// ============ INIT ============
+document.getElementById('mainNav').style.display='flex';
+renderGallery();
+
+// Demo student
+if(!DB.students.length){
+  DB.students.push({id:'demo1',name:'Aarav Sharma',age:10,std:'5th',school:'City Public School',parent:'Priya Sharma',phone:'9876543210',email:'priya@example.com',artBefore:'No',skill:'Intermediate',days:'Weekends',time:'Evening',plan:'Popular Plan',planTerms:24,planPrice:'2400',startDate:new Date().toLocaleDateString('en-IN'),expiryDate:new Date(Date.now()+90*864e5).toLocaleDateString('en-IN'),registeredOn:new Date().toISOString(),attendance:[{date:new Date(Date.now()-10*864e5).toLocaleDateString('en-IN'),status:'Attended'},{date:new Date(Date.now()-8*864e5).toLocaleDateString('en-IN'),status:'Attended'},{date:new Date(Date.now()-6*864e5).toLocaleDateString('en-IN'),status:'Missed'},{date:new Date(Date.now()-4*864e5).toLocaleDateString('en-IN'),status:'Attended'}],usedTerms:6,bonusTerms:0,nextClassDay:'Saturday',nextClassTime:'5:00 PM – 7:00 PM',artSrc:''});
+  save();
+}
+</script>
+</body>
+</html>
